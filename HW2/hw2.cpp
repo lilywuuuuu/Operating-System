@@ -132,7 +132,7 @@ void multilevel(vector<vector<int> > process, vector<int> queue, vector<int> tim
                 pqs[next_queue_index - 1].push(top);
             }
         }
-        // cout << top[0] << " ran for " << run_period << " from " << timeline-run_period << " to " << timeline << " in queue " << next_queue_index - 1 << endl;;
+        cout << top[0] << " ran for " << run_period << " from " << timeline-run_period << " to " << timeline << " in queue " << next_queue_index - 1 << endl;;
     }
     print(wait, turnaround, wait_sum, turnaround_sum);
 }
