@@ -26,7 +26,7 @@ void count_primes(int start, int end) {
         }
     }
 }
-
+ 
 int main(int argc, char* argv[]) {
     int t = 1;
     if (argc > 2 && string(argv[1]) == "-t") // check if there's argument -t 
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < t; i++) {
         int start = i * num_per_t + 1;
         int end = (i == t - 1) ? n : start + num_per_t - 1;
-        threads.push_back(thread(count_primes, start, end));
+        threads.emplace_back(thread(count_primes, start, end));
         // cout << start << " " << end << endl;
     }
 

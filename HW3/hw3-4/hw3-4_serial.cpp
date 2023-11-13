@@ -20,7 +20,7 @@ void solve(int index, uint64_t current) {
 int main() {
     cin >> n >> m;
 
-    subsets.resize(m);
+    subsets.resize(m); 
     for (int i = 0; i < m; i++) {
         int p, temp;
         cin >> p;

@@ -13,7 +13,7 @@ bool is_prime(int num) {
         }
     }
     return true;
-}
+} 
 
 int main(int argc, char* argv[]) {
     cin >> n;

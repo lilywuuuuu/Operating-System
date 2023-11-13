@@ -1,7 +1,7 @@
 #!/bin/sh
 
 case_num=3
-filename=hw3-3
+filename=hw3-4
 
 while getopts "t:" op 2>/dev/null; do
   case $op in
