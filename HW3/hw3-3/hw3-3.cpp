@@ -19,11 +19,15 @@ bool is_prime(int num) {
 }
 
 void count_primes(int start, int end) {
+    int count = 0;
     for (int i = start; i <= end; i++) {
         if (is_prime(i)) {
-            lock_guard<mutex> lock(mtx);
-            global_count++;
+            count++;
         }
+    }
+    {
+        lock_guard<mutex> lock(mtx);
+        global_count+=count;
     }
 }
  

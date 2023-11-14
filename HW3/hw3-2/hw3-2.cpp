@@ -53,20 +53,20 @@ mutex mtx;
 
 void maximum_independent_set(int v) { // modify this part
   bool converged = false;
-
   while (!converged) { 
-    lock_guard<mutex> lock(mtx);
+    mtx.lock();
     if (vertex_checked[v]) {
       converged = is_converged();
+      mtx.unlock();
     } else {
       bool old_response = vertex_status[v];
       vertex_status[v] = best_response(v);
-
       vertex_checked[v] = true;
       if (vertex_status[v] != old_response) {
         for (int u : adjacent_matrix[v])
           vertex_checked[u] = false;
       }
+      mtx.unlock();
     }
   }
 }

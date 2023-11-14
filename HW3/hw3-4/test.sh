@@ -1,5 +1,6 @@
 #!/bin/sh
 
+num_threads=1
 case_num=3
 filename=hw3-4
 

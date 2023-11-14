@@ -21,10 +21,10 @@ test -e tmp || exit 255
 multi_ans=$(gtime -p -o "$num_threads"threads.txt ./tmp -t "$num_threads" < testcase/case"$case_num".txt)
 single_ans=$(gtime -p -o 1thread.txt ./tmpp -t 1 < testcase/case"$case_num".txt)
 ans=$(cat answer/case"$case_num".txt)
-if [ $multi_ans -ne $ans ]; then
+if [ "$multi_ans" != "$ans" ]; then
   echo "Answer of multiple thread is wrong, the answer of multiple thread is $multi_ans"
 fi
-if [ $single_ans -ne $ans ]; then
+if [ "$single_ans" -ne "$ans" ]; then
   echo "Answer of single thread is wrong, the answer of single thread is $single_ans"
 fi
 
