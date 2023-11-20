@@ -16,10 +16,9 @@ done
 
 # g++ "$filename" -o tmp -lpthread
 g++ -std=c++20 -lpthread "${filename}.cpp" -o tmp
-g++ -std=c++20 -lpthread "${filename}_serial.cpp" -o tmpp
 test -e tmp || exit 255
 multi_ans=$(gtime -p -o "$num_threads"threads.txt ./tmp -t "$num_threads" < testcase/case"$case_num".txt)
-single_ans=$(gtime -p -o 1thread.txt ./tmpp -t 1 < testcase/case"$case_num".txt)
+single_ans=$(gtime -p -o 1thread.txt ./tmp -t 1 < testcase/case"$case_num".txt)
 ans=$(cat answer/case"$case_num".txt)
 if [ "$multi_ans" != "$ans" ]; then
   echo "Answer of multiple thread is wrong, the answer of multiple thread is $multi_ans"
@@ -40,4 +39,4 @@ else
   echo "Error: Unable to calculate speed up."
 fi
 
-rm tmp tmpp
+rm tmp

@@ -4,7 +4,6 @@
 
 using namespace std;
 
-mutex mtx;
 int counter = 0;
 
 void countt(int index) { 
