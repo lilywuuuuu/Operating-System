@@ -12,8 +12,8 @@ void solve(int index, uint64_t current) {
     if (index == m) {
         if (current == (one << n) - 1) global_count++;
     } else {
-        solve(index + 1, current);
-        solve(index + 1, current | subsets[index]);
+        solve(index + 1, current); // 不聯集 subset[index]
+        solve(index + 1, current | subsets[index]); // 聯集 subset[index]
     }
 }
 
