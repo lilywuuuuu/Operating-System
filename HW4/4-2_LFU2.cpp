@@ -17,8 +17,15 @@ int main(void){
             for (int j=0; j<cache[i].size(); j++){
                 // data is found 
                 if (data == cache[i][j]){ 
-                    // cout << "[ O ] " << data << " found at (" << i << ", " << j << ")\n";
-                    freq[i][j]++; 
+                    int f = freq[i][j]; 
+                    // move data to the back (most recently used)
+                    cout << "[ O ] " << data << " found at (" << i << ", " << j << ")\n";
+                    for(int l=j; l<cache[i].size()-1; l++){ 
+                        cache[i][l] = cache[i][l+1];
+                        freq[i][l] = freq[i][l+1];
+                    }
+                    cache[i][cache[i].size()-1] = data;
+                    freq[i][cache[i].size()-1] = f+1; 
                     found = true; 
                     break; 
                 } 
@@ -36,28 +43,32 @@ int main(void){
             else {
                 int least_freq = INT_MAX;
                 int freq_index = 0; 
-                for (int j=0; j<k; j++){
+                for (int j=k-1; j>=0; j--){
                     if (freq[s][j] < least_freq){
                         least_freq = freq[s][j];
                         freq_index = j; 
                     }
                 }
-                cache[s][freq_index] = data;
-                freq[s][freq_index] = 0;
+                for (int j=freq_index; j<k-1; j++){
+                    cache[s][j] = cache[s][j+1];
+                    freq[s][j] = freq[s][j+1];
+                } 
+                cache[s][k-1] = data;
+                freq[s][k-1] = 0;
             }
-            // cout << "[ X ] " << data << " pushed at (" << s << ", " << cache[s].size()-1 << ")\n";
+            cout << "[ X ] " << data << " pushed at (" << s << ", " << cache[s].size()-1 << ")\n";
             miss++;
         }
-    //     for(int i=0; i<sets; i++){
-    //         cout << "cache " << i << ": ";
-    //         for (int j=0; j<cache[i].size(); j++){
-    //             cout << cache[i][j] << " ";
-    //         } 
-    //         cout << "\tfreq " << i << ": "; 
-    //         for (int j=0; j<freq[i].size(); j++){
-    //             cout << freq[i][j] << " ";
-    //         } cout << endl; 
-    //     } cout << endl; 
+        for(int i=0; i<sets; i++){
+            cout << "cache " << i << ": ";
+            for (int j=0; j<cache[i].size(); j++){
+                cout << cache[i][j] << " ";
+            } 
+            cout << "\tfreq " << i << ": "; 
+            for (int j=0; j<freq[i].size(); j++){
+                cout << freq[i][j] << " ";
+            } cout << endl; 
+        } cout << endl; 
     }
     cout << "Total Cache Misses: " << miss << endl; 
     return 0;

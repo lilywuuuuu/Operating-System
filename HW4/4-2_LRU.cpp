@@ -16,7 +16,7 @@ int main(void){
                 // data is found 
                 if (data == cache[i][j]){ 
                     // move data to the back (most recently used)
-                    cout << "[ O ] " << data << " found at (" << i << ", " << j << ")\n";
+                    // cout << "[ O ] " << data << " found at (" << i << ", " << j << ")\n";
                     for(int l=j; l<cache[i].size()-1; l++){ 
                         cache[i][l] = cache[i][l+1];
                     } cache[i][cache[i].size()-1] = data;
@@ -38,15 +38,15 @@ int main(void){
                     cache[s][j] = cache[s][j+1];
                 } cache[s][k-1] = data;
             }
-            cout << "[ X ] " << data << " pushed at (" << s << ", " << cache[s].size()-1 << ")\n";
+            // cout << "[ X ] " << data << " pushed at (" << s << ", " << cache[s].size()-1 << ")\n";
             miss++;
         }
-        for(int i=0; i<sets; i++){
-            cout << "cache " << i << ": ";
-            for (int j=0; j<cache[i].size(); j++){
-                cout << cache[i][j] << " ";
-            } cout << endl; 
-        } cout << endl; 
+        // for(int i=0; i<sets; i++){
+        //     cout << "cache " << i << ": ";
+        //     for (int j=0; j<cache[i].size(); j++){
+        //         cout << cache[i][j] << " ";
+        //     } cout << endl; 
+        // } cout << endl; 
     }
     cout << "Total Cache Misses: " << miss << endl; 
     return 0;
