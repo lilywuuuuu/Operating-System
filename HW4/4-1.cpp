@@ -5,7 +5,6 @@ using namespace std;
 int main(void){
     int blocks, n, miss = 0;
     cin >> blocks >> n;
-    // vector<int> data(n);
     vector<int> cache(blocks, -1);
     for(int i=0; i<n; i++){
         int data;
@@ -19,7 +18,7 @@ int main(void){
             }
         }
     }
-    cout << "Total Cache Misses: " << miss << endl; 
+    cout << "Total Cache Misses:" << miss << endl; 
 
     return 0;
 }
