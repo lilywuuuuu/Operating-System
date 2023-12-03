@@ -18,7 +18,7 @@ int main(void){
             }
         }
     }
-    cout << "Total Cache Misses:" << miss << endl; 
+    cout << "Total Cache Misses:" << miss; 
 
     return 0;
 }

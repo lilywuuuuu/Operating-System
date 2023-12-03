@@ -48,6 +48,6 @@ int main(void){
         //     } cout << endl; 
         // } cout << endl; 
     }
-    cout << "Total Cache Misses:" << miss << endl; 
+    cout << "Total Cache Misses:" << miss; 
     return 0;
 }
