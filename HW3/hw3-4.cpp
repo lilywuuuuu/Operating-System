@@ -1,9 +1,9 @@
-#include <iostream>
-#include <cstdint>
-#include <vector>
-#include <thread>
 #include <atomic>
+#include <cstdint>
+#include <iostream>
 #include <mutex>
+#include <thread>
+#include <vector>
 
 using namespace std;
 
@@ -33,37 +33,37 @@ int main(int argc, char* argv[]) {
             subsets[i] |= (one << temp);
         }
     }
-    
-    int t = 1; // thread count
-    if (argc > 2 && string(argv[1]) == "-t"){
+
+    int t = 1;  // thread count
+    if (argc > 2 && string(argv[1]) == "-t") {
         t = stoi(argv[2]);
     }
     local_count.resize(t, 0);
 
-    if (t == 1){ // 1 thread
+    if (t == 1) {  // 1 thread
         solve(0, 0, 0);
-    } else if (t == 2 || m == 1){ // 2 threads or only 1 subset
+    } else if (t == 2 || m == 1) {  // 2 threads or only 1 subset
         threads.emplace_back(thread(solve, 1, 0, 0));
         threads.emplace_back(thread(solve, 1, subsets[0], 1));
-    } else if (t == 4 || m == 2){ // 4 threads or only 2 subsets
+    } else if (t == 4 || m == 2) {  // 4 threads or only 2 subsets
         threads.emplace_back(thread(solve, 2, 0, 0));
         threads.emplace_back(thread(solve, 2, subsets[0], 1));
         threads.emplace_back(thread(solve, 2, subsets[1], 2));
-        threads.emplace_back(thread(solve, 2, subsets[0]|subsets[1], 3));
-    } else { // 8 threads and at least 3 sets
+        threads.emplace_back(thread(solve, 2, subsets[0] | subsets[1], 3));
+    } else {  // 8 threads and at least 3 sets
         threads.emplace_back(thread(solve, 3, 0, 0));
         threads.emplace_back(thread(solve, 3, subsets[0], 1));
         threads.emplace_back(thread(solve, 3, subsets[1], 2));
         threads.emplace_back(thread(solve, 3, subsets[2], 3));
-        threads.emplace_back(thread(solve, 3, subsets[0]|subsets[1], 4));
-        threads.emplace_back(thread(solve, 3, subsets[0]|subsets[2], 5));
-        threads.emplace_back(thread(solve, 3, subsets[1]|subsets[2], 6));
-        threads.emplace_back(thread(solve, 3, subsets[0]|subsets[1]|subsets[2], 7));
+        threads.emplace_back(thread(solve, 3, subsets[0] | subsets[1], 4));
+        threads.emplace_back(thread(solve, 3, subsets[0] | subsets[2], 5));
+        threads.emplace_back(thread(solve, 3, subsets[1] | subsets[2], 6));
+        threads.emplace_back(thread(solve, 3, subsets[0] | subsets[1] | subsets[2], 7));
     }
-    for (auto &t : threads){
+    for (auto& t : threads) {
         t.join();
     }
-    for(int i=0; i<t; i++){
+    for (int i = 0; i < t; i++) {
         global_count += local_count[i];
     }
     cout << global_count << endl;
